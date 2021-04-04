@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".MainActivity">
+    
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/style_for_current_weather">
+        
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1.5">
+
+                    <ImageView
+                        android:id="@+id/currentWeatherIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                         />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_weight="1">
+                  <TextView
+                      android:id="@+id/currentCity"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="36dp"
+                      android:text="Today"/>
+                    <TextView
+                        android:id="@+id/temp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:drawableLeft="@drawable/temp"
+                        android:drawablePadding="20dp"
+                        android:textSize="40dp"
+                        android:text="15*"/>
+                    <TextView
+                        android:id="@+id/currentMinMax"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="min: 14 - max: 16"/>
+                    <TextView
+                        android:id="@+id/weatherMain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="20dp"
+                        android:text="Sunny"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
+        
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </androidx.recyclerview.widget.RecyclerView>
+    
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

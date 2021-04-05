@@ -7,4 +7,12 @@ public class DayData {
     public DayData(JSONObject jsn) {
         this.jsn = jsn;
     }
+
+    public JSONObject getJsn() {
+        return jsn;
+    }
+
+    public void setJsn(JSONObject jsn) {
+        this.jsn = jsn;
+    }
 }

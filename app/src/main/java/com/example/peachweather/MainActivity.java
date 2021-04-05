@@ -7,10 +7,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -29,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         currentWeatherIcon = findViewById(R.id.currentWeatherIcon);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        adapter = new RecyclerViewAdapter(4,this);
-        recyclerView.setAdapter(adapter);
         CurrentWeatherData currentWeatherData = new CurrentWeatherData();
         if(currentWeatherData.getWeather(cnst.MAIN.get()).equals("Clear")){
             currentWeatherIcon.setImageResource(R.drawable.sun);
@@ -41,9 +47,14 @@ public class MainActivity extends AppCompatActivity {
             currentWeatherIcon.setImageResource(R.drawable.sun_cloud);
         }
         currentMinMax.setText("min: "+ currentWeatherData.getMain(cnst.TEMP_MIN.get()) + " - max: " + currentWeatherData.getMain(cnst.TEMP_MAX.get()));
-        currentCity.setText(currentWeatherData.getCity());
+        currentCity.setText("Dzisiaj");
         weatherMain.setText(currentWeatherData.getWeather(cnst.DESCRIPTION.get()));
         currentTemp.setText(currentWeatherData.getMain(cnst.TEMP.get()) + "℃");
         FiveDaysWeatherData fiveDaysWeatherData = new FiveDaysWeatherData();
+        adapter = new RecyclerViewAdapter(fiveDaysWeatherData.getDays(),this);
+        recyclerView.setAdapter(adapter);
+
+
     }
+
 }

@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -16,8 +17,17 @@ public class FiveDaysWeatherData {
     JSONObject jsonData;
     ArrayList<JSONObject> jsonObj = new ArrayList<>();
     ArrayList<String> dates = new ArrayList<>();
-    ArrayList<DayData> dayData = new ArrayList<>();
+    ArrayList<DayData> dayData;
     ArrayList<Day> days = new ArrayList<>();
+
+    public ArrayList<Day> getDays() {
+        return days;
+    }
+
+    public void setDays(ArrayList<Day> days) {
+        this.days = days;
+    }
+
     public FiveDaysWeatherData(){
         Runnable run;
         Thread thread;
@@ -37,14 +47,18 @@ public class FiveDaysWeatherData {
                     Response response = client.newCall(request).execute();
                     String myJson = response.body().string();
                     jsonData = new JSONObject(myJson);
-                    for(int i = 0; i<jsonData.getJSONArray("list").length(); i++){
-                        jsonObj.add(jsonData.getJSONArray("list").getJSONObject(i));
+                    for(int i = 0; i<jsonData.getJSONArray(cnst.LIST.get()).length(); i++){
+                        jsonObj.add(jsonData.getJSONArray(cnst.LIST.get()).getJSONObject(i));
                     }
                     getDates();
-                    for(String d:dates){
-                        Log.d("log", "DATA --------------?" + d);
+                    getDaysList();
+                    for(Day d: days){
+                        Log.d("log","Day is:" + d.getDate());
+                        for(DayData dy: d.getDay()){
+                            Log.d("log","TEEEEEEEEEEST" + dy.getJsn().names());
+                        }
                     }
-                    Log.d("log", "TEST ================================> " + jsonObj.get(0).getString("dt_txt"));
+
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
@@ -61,18 +75,56 @@ public class FiveDaysWeatherData {
     private void getDates() throws JSONException {
         for(JSONObject j: jsonObj){
             if(dates.size()>0){
-                for(String s:dates){
-                    
+                if(!checkSimilar(j.getString(cnst.DATE.get()).substring(0,10))){
+                    dates.add(j.getString(cnst.DATE.get()).substring(0,10));
                 }
-            dates.add(j.getString("dt_txt"));
             }else{
-                dates.add(j.getString("dt_txt").substring(0,9));
+                dates.add(j.getString(cnst.DATE.get()).substring(0,10));
             }
         }
     }
-    private void getDays(){
-        for(JSONObject j: jsonObj){
+    private void getDaysList() throws JSONException {
+            float maxTemp =0 , minTemp = 0;
+            String weather = cnst.CLEAR.get();
+            for(int i = 0; i< dates.size(); i++){
+                dayData = new ArrayList<>();
+                for(JSONObject j: jsonObj){
+                    if(j.getString(cnst.DATE.get()).substring(0,10).equals(dates.get(i))){
+                        if(Float.parseFloat(j.getJSONObject(cnst.MAIN.get()).getString(cnst.TEMP_MAX.get())) > maxTemp){
+                            maxTemp = Float.parseFloat(j.getJSONObject(cnst.MAIN.get()).getString(cnst.TEMP_MAX.get()));
+                        }
+                        if(Float.parseFloat(j.getJSONObject(cnst.MAIN.get()).getString(cnst.TEMP_MIN.get())) < minTemp){
+                            minTemp = Float.parseFloat(j.getJSONObject(cnst.MAIN.get()).getString(cnst.TEMP_MIN.get()));
+                        }
+                        if(j.getJSONArray(cnst.WEATHER.get()).getJSONObject(0).getString(cnst.MAIN.get()).equals(cnst.RAIN.get())){
+                            weather = cnst.RAIN.get();
+                        }
+                        if(j.getJSONArray(cnst.WEATHER.get()).getJSONObject(0).getString(cnst.MAIN.get()).equals(cnst.CLOUD.get()) && !weather.equals(cnst.RAIN.get())){
+                            weather = cnst.CLOUD.get();
+                        }
 
+                        dayData.add(new DayData(j));
+                    }
+                }
+                days.add(new Day(dayData, dates.get(i), String.valueOf(minTemp), String.valueOf(maxTemp), weather));
+                dayData = null;
+                maxTemp = 0;
+                minTemp = 0;
+                weather = cnst.CLEAR.get();
+            }
+
+    }
+    private boolean checkSimilar(String s){
+        boolean result = false;
+        for(String st: dates){
+            if(st.equals(s)){
+                result = true;
+                break;
+            }
+            else{
+                result = false;
+            }
         }
+        return result;
     }
 }

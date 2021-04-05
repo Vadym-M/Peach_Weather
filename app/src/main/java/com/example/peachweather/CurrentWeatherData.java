@@ -167,6 +167,11 @@ public class CurrentWeatherData {
     }
 }
 enum cnst{
+    CLEAR("Clear"),
+    RAIN("Rain"),
+    CLOUD("Clouds"),
+    LIST("list"),
+    DATE("dt_txt"),
     CITY("name"),
 MAIN ("main"),
 WEATHER ("weather"),

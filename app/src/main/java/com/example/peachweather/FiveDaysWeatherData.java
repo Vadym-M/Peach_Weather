@@ -86,6 +86,7 @@ public class FiveDaysWeatherData {
     private void getDaysList() throws JSONException {
             float maxTemp =0 , minTemp = 0;
             String weather = cnst.CLEAR.get();
+            String des = "bezchmurnie";
             for(int i = 0; i< dates.size(); i++){
                 dayData = new ArrayList<>();
                 for(JSONObject j: jsonObj){
@@ -98,19 +99,22 @@ public class FiveDaysWeatherData {
                         }
                         if(j.getJSONArray(cnst.WEATHER.get()).getJSONObject(0).getString(cnst.MAIN.get()).equals(cnst.RAIN.get())){
                             weather = cnst.RAIN.get();
+                            des = j.getJSONArray(cnst.WEATHER.get()).getJSONObject(0).getString(cnst.DESCRIPTION.get());
                         }
                         if(j.getJSONArray(cnst.WEATHER.get()).getJSONObject(0).getString(cnst.MAIN.get()).equals(cnst.CLOUD.get()) && !weather.equals(cnst.RAIN.get())){
                             weather = cnst.CLOUD.get();
+                            des = j.getJSONArray(cnst.WEATHER.get()).getJSONObject(0).getString(cnst.DESCRIPTION.get());
                         }
 
                         dayData.add(new DayData(j));
                     }
                 }
-                days.add(new Day(dayData, dates.get(i), String.valueOf(minTemp), String.valueOf(maxTemp), weather));
+                days.add(new Day(dayData, dates.get(i), String.valueOf(minTemp), String.valueOf(maxTemp), weather, des));
                 dayData = null;
                 maxTemp = 0;
                 minTemp = 0;
                 weather = cnst.CLEAR.get();
+                des = "bezchmurnie";
             }
 
     }

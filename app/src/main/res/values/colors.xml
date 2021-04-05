@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_200">#FFBB86FC</color>
-    <color name="peach_color">#FFDCB8</color>
+    <color name="peach_color">#dcd6f7</color>
     <!--<color name="peach_color">#FFEEBB</color>-->
-    <color name="main_color">#FFDCB8</color>
+    <color name="main_color">#424874</color>
     <!--<color name="main_color">#FFEEBB</color>-->
-    <color name="background_color">#FDFFBC</color>
+    <color name="background_color">#f4eeff</color>
     <color name="background_color2">#FBFBDB</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>

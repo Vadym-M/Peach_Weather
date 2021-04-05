@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
         android:layout_marginTop="3dp"
-        android:background="@drawable/style_for_divider"
         android:orientation="horizontal">
 
 
@@ -23,7 +22,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
             android:text="Poznan"
-            android:textSize="20dp" />
+            android:textSize="@dimen/_26sdp" />
 
         <ImageButton
             android:layout_width="40dp"
@@ -35,19 +34,18 @@
             android:layout_alignParentRight="true"
             android:src="@drawable/settings"/>
     </RelativeLayout>
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/style_for_current_weather">
+        app:cardCornerRadius="20dp"
+        android:layout_margin="@dimen/_5sdp">
         
-        <com.google.android.material.appbar.MaterialToolbar
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@drawable/style_for_block_135">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -63,8 +61,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:orientation="vertical"
                     android:gravity="center"
                     android:layout_weight="1">
@@ -72,7 +70,7 @@
                       android:id="@+id/currentCity"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:textSize="36dp"
+                      android:textSize="@dimen/_26sdp"
                       android:text="Today"/>
                     <TextView
                         android:id="@+id/temp"
@@ -81,25 +79,25 @@
                         android:gravity="center"
                         android:drawableLeft="@drawable/temp"
                         android:drawablePadding="20dp"
-                        android:textSize="40dp"
+                        android:textSize="@dimen/_36sdp"
                         android:text="15*"/>
                     <TextView
                         android:id="@+id/currentMinMax"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_10sdp"
                         android:text="min: 14 - max: 16"/>
                     <TextView
                         android:id="@+id/weatherMain"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textSize="20dp"
+                        android:textSize="@dimen/_12sdp"
                         android:text="Sunny"/>
                 </LinearLayout>
             </LinearLayout>
-        </com.google.android.material.appbar.MaterialToolbar>
-        
-    </com.google.android.material.appbar.AppBarLayout>
+
+    </androidx.cardview.widget.CardView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
@@ -111,8 +109,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="15dp"
-    android:background="@drawable/style_for_divider"
+    android:layout_marginTop="@dimen/_8sdp"
     android:paddingLeft="5dp"
     android:gravity="center_vertical"
     android:orientation="horizontal">
@@ -132,21 +129,21 @@
         android:layout_toEndOf="@+id/lock"
         android:layout_centerVertical="true"
         android:text="Pogoda na 30 dni"
-        android:textSize="24dp" />
+        android:textSize="@dimen/_12sdp" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:layout_marginBottom="3dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
         android:background="@color/background_color"
         android:src="@drawable/chevron_right"/>
 </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:gravity="center"
         android:orientation="vertical"
@@ -157,14 +154,14 @@
     android:layout_gravity="center"
     android:layout_margin="10dp"
     android:gravity="center"
-    android:textSize="20dp"
+    android:textSize="@dimen/_12sdp"
     android:text="Musisz kupić premium aby oglądać pogodę na 30 dni"/>
         <ImageView
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:src="@drawable/lock_yellow"/>
+            android:src="@drawable/lock"/>
     </LinearLayout>
 
 </LinearLayout>

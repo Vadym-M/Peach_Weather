@@ -48,6 +48,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     holder.tempMax.setText(df.format(Float.valueOf(days.get(position).getMaxTemp())) + "°");
     holder.tempMin.setText(df.format(Float.valueOf(days.get(position).getMinTemp())) + "°");
+    holder.desc.setText(days.get(position).getDesc());
 
         if(days.get(position).getWeather().equals(cnst.CLEAR.get())){
             holder.icon.setImageResource(R.drawable.sun);
@@ -71,11 +72,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView icon;
-        TextView day, tempMax, tempMin;
+        TextView day, tempMax, tempMin, desc;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             icon = itemView.findViewById(R.id.dayWeatherIcon);
             day = itemView.findViewById(R.id.currentDay);
+            desc = itemView.findViewById(R.id.desc);
             tempMax = itemView.findViewById(R.id.dayTempMax);
             tempMin = itemView.findViewById(R.id.dayTempMin);
         }

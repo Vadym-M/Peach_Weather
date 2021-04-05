@@ -10,17 +10,26 @@ import java.util.Locale;
 public class Day {
     ArrayList<DayData> day;
     String date;
-    String minTemp, maxTemp, weather;
+    String minTemp, maxTemp, weather, desc;
 
     public Day() {
     }
 
-    public Day(ArrayList<DayData> day, String date, String minTemp, String maxTemp, String weather) {
+    public Day(ArrayList<DayData> day, String date, String minTemp, String maxTemp, String weather, String desc) {
         this.weather = weather;
         this.minTemp = minTemp;
         this.maxTemp = maxTemp;
+        this.desc = desc;
         this.date = date;
         this.day = day;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getWeather() {

@@ -38,13 +38,18 @@ public class MainActivity extends AppCompatActivity {
         currentWeatherIcon = findViewById(R.id.currentWeatherIcon);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         CurrentWeatherData currentWeatherData = new CurrentWeatherData();
-        if(currentWeatherData.getWeather(cnst.MAIN.get()).equals("Clear")){
-            currentWeatherIcon.setImageResource(R.drawable.sun);
-        }
-        else if(currentWeatherData.getWeather(cnst.MAIN.get()).equals("Rain")){
-            currentWeatherIcon.setImageResource(R.drawable.rain);
-        }else{
-            currentWeatherIcon.setImageResource(R.drawable.sun_cloud);
+        switch (currentWeatherData.getWeather(cnst.MAIN.get())){
+            case "Clear":
+                currentWeatherIcon.setImageResource(R.drawable.sun);
+                break;
+            case "Rain":
+                currentWeatherIcon.setImageResource(R.drawable.rain);
+                break;
+            case "Snow":
+                currentWeatherIcon.setImageResource(R.drawable.snow);
+                break;
+            default:
+                currentWeatherIcon.setImageResource(R.drawable.sun_cloud);
         }
         currentMinMax.setText("min: "+ currentWeatherData.getMain(cnst.TEMP_MIN.get()) + " - max: " + currentWeatherData.getMain(cnst.TEMP_MAX.get()));
         currentCity.setText("Dzisiaj");

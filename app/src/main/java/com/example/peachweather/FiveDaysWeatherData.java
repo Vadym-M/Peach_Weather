@@ -39,7 +39,7 @@ public class FiveDaysWeatherData {
                 Request request = new Request.Builder()
                         .url("https://community-open-weather-map.p.rapidapi.com/forecast?q=Poznan&units=metric&lang=pl")
                         .get()
-                        .addHeader("x-rapidapi-key", "82d36f6eacmsh340f7fbd85d7318p1e67e2jsn798a6ba7706c")
+                        .addHeader("x-rapidapi-key", "55e384f6c9msh6c75a06007dc332p1ff13ejsnd757a6f9424b")
                         .addHeader("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
                         .build();
 
@@ -97,11 +97,15 @@ public class FiveDaysWeatherData {
                         if(Float.parseFloat(j.getJSONObject(cnst.MAIN.get()).getString(cnst.TEMP_MIN.get())) < minTemp){
                             minTemp = Float.parseFloat(j.getJSONObject(cnst.MAIN.get()).getString(cnst.TEMP_MIN.get()));
                         }
-                        if(j.getJSONArray(cnst.WEATHER.get()).getJSONObject(0).getString(cnst.MAIN.get()).equals(cnst.RAIN.get())){
+                        if(j.getJSONArray(cnst.WEATHER.get()).getJSONObject(0).getString(cnst.MAIN.get()).equals(cnst.SNOW.get())){
+                            weather = cnst.SNOW.get();
+                            des = j.getJSONArray(cnst.WEATHER.get()).getJSONObject(0).getString(cnst.DESCRIPTION.get());
+                        }
+                        if(j.getJSONArray(cnst.WEATHER.get()).getJSONObject(0).getString(cnst.MAIN.get()).equals(cnst.RAIN.get()) && !weather.equals(cnst.SNOW.get())){
                             weather = cnst.RAIN.get();
                             des = j.getJSONArray(cnst.WEATHER.get()).getJSONObject(0).getString(cnst.DESCRIPTION.get());
                         }
-                        if(j.getJSONArray(cnst.WEATHER.get()).getJSONObject(0).getString(cnst.MAIN.get()).equals(cnst.CLOUD.get()) && !weather.equals(cnst.RAIN.get())){
+                        if(j.getJSONArray(cnst.WEATHER.get()).getJSONObject(0).getString(cnst.MAIN.get()).equals(cnst.CLOUD.get()) && !weather.equals(cnst.RAIN.get()) && !weather.equals(cnst.SNOW.get())){
                             weather = cnst.CLOUD.get();
                             des = j.getJSONArray(cnst.WEATHER.get()).getJSONObject(0).getString(cnst.DESCRIPTION.get());
                         }

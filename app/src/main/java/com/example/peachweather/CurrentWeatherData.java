@@ -41,7 +41,7 @@ public class CurrentWeatherData {
                 Request request = new Request.Builder()
                         .url("https://community-open-weather-map.p.rapidapi.com/weather?q=Poznan&lat=0&lon=0&id=2172797&lang=pl&units=metric")
                         .get()
-                        .addHeader("x-rapidapi-key", "82d36f6eacmsh340f7fbd85d7318p1e67e2jsn798a6ba7706c")
+                        .addHeader("x-rapidapi-key", "55e384f6c9msh6c75a06007dc332p1ff13ejsnd757a6f9424b")
                         .addHeader("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
                         .build();
 
@@ -167,6 +167,7 @@ public class CurrentWeatherData {
     }
 }
 enum cnst{
+    SNOW("Snow"),
     CLEAR("Clear"),
     RAIN("Rain"),
     CLOUD("Clouds"),

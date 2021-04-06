@@ -6,7 +6,7 @@
     android:layout_marginTop="@dimen/_5sdp">
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     app:cardCornerRadius="20dp"
     android:layout_gravity="center_horizontal"
     android:layout_margin="5dp">
@@ -74,9 +74,9 @@
                     android:text="15*"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_weight="1"
+
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center">
                 <TextView
                     android:id="@+id/desc"

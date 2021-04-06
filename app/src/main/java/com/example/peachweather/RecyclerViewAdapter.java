@@ -49,14 +49,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     holder.tempMax.setText(df.format(Float.valueOf(days.get(position).getMaxTemp())) + "°");
     holder.tempMin.setText(df.format(Float.valueOf(days.get(position).getMinTemp())) + "°");
     holder.desc.setText(days.get(position).getDesc());
-
-        if(days.get(position).getWeather().equals(cnst.CLEAR.get())){
-            holder.icon.setImageResource(R.drawable.sun);
-        }
-        else if(days.get(position).getWeather().equals(cnst.RAIN.get())){
-            holder.icon.setImageResource(R.drawable.rain);
-        }else{
-            holder.icon.setImageResource(R.drawable.sun_cloud);
+        switch (days.get(position).getWeather()){
+            case "Clear":
+                holder.icon.setImageResource(R.drawable.sun);
+                break;
+            case "Rain":
+                holder.icon.setImageResource(R.drawable.rain);
+                break;
+            case "Snow":
+                holder.icon.setImageResource(R.drawable.snow);
+                break;
+            default:
+                holder.icon.setImageResource(R.drawable.sun_cloud);
         }
 
     }

@@ -19,9 +19,20 @@ public class FiveDaysWeatherData {
     ArrayList<String> dates = new ArrayList<>();
     ArrayList<DayData> dayData;
     ArrayList<Day> days = new ArrayList<>();
+    Day currentDay;
 
     public ArrayList<Day> getDays() {
+        if(days.size()>=5){ days.remove(days.size()-1);}
+        if(days.size()>4) {
+            days.remove(0);
+        }
+        Log.d("log", "SIZE IS : "+ days.size());
         return days;
+    }
+
+    public Day getCurrentDay() {
+        Log.d("log", "CURRENY DAY: " + currentDay.getDate());
+        return currentDay;
     }
 
     public void setDays(ArrayList<Day> days) {
@@ -53,9 +64,7 @@ public class FiveDaysWeatherData {
                     getDates();
                     getDaysList();
                     for(Day d: days){
-                        Log.d("log","Day is:" + d.getDate());
                         for(DayData dy: d.getDay()){
-                            Log.d("log","TEEEEEEEEEEST" + dy.getJsn().names());
                         }
                     }
 
@@ -113,6 +122,7 @@ public class FiveDaysWeatherData {
                         dayData.add(new DayData(j));
                     }
                 }
+                Log.d("log", "INIT :  okey");
                 days.add(new Day(dayData, dates.get(i), String.valueOf(minTemp), String.valueOf(maxTemp), weather, des));
                 dayData = null;
                 maxTemp = 0;
@@ -120,8 +130,10 @@ public class FiveDaysWeatherData {
                 weather = cnst.CLEAR.get();
                 des = "bezchmurnie";
             }
+            currentDay = days.get(0);
 
     }
+
     private boolean checkSimilar(String s){
         boolean result = false;
         for(String st: dates){

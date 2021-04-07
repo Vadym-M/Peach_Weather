@@ -1,7 +1,7 @@
 package com.example.peachweather;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -22,13 +21,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     Day day = new Day();
     DecimalFormat df = new DecimalFormat("#");
     public RecyclerViewAdapter(ArrayList<Day> days, Context context) {
-        days.remove(0);
-        if(days.size()>=5){
-            days.remove(days.size()-1);
-        }
+        //if(days.size()>=5){
+        //    days.remove(days.size()-1);
+        //}
         this.days = days;
         this.context = context;
-        Log.d("log", "ADAPTER SIZE " + days.size());
+
     }
 
     @NonNull
@@ -62,6 +60,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             default:
                 holder.icon.setImageResource(R.drawable.sun_cloud);
         }
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailedInfo.class);
+                intent.putExtra("pos", position);
+                context.startActivity(intent);
+            }
+        });
 
     }
     private String dateToUpperCase(String date){
@@ -77,13 +83,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView icon;
         TextView day, tempMax, tempMin, desc;
+        CardView card;
+        //
+        ImageView f_icon;
+        TextView f_wind, f_time, f_humidity, f_feel_like, f_weather, f_temp;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            card = itemView.findViewById(R.id.card_of_weather);
             icon = itemView.findViewById(R.id.dayWeatherIcon);
             day = itemView.findViewById(R.id.currentDay);
             desc = itemView.findViewById(R.id.desc);
             tempMax = itemView.findViewById(R.id.dayTempMax);
             tempMin = itemView.findViewById(R.id.dayTempMin);
+            //
+            //f_wind = itemView.findViewById(R.id.info_wind);
+            f_time = itemView.findViewById(R.id.info_time);
+            f_humidity = itemView.findViewById(R.id.info_humidity);
+            f_temp = itemView.findViewById(R.id.info_temp);
+            f_weather = itemView.findViewById(R.id.info_weather);
+            f_feel_like = itemView.findViewById(R.id.info_feel_like);
+            f_icon = itemView.findViewById(R.id.info_icon);
         }
     }
 }

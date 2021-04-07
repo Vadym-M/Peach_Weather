@@ -70,14 +70,12 @@ public class CurrentWeatherData {
     }
     public String getWeather(String key){
         String vel = "None";
-        Log.d("log", "It is KEY ==> : "+ key);
         switch (key){
             case "main":
                 try {
                     //Log.d("log", "Its MAIN ===> " + jsonData.getJSONArray("weather").getJSONObject(0).getString(cnst.MAIN.get()));
                     vel = jsonData.getJSONArray(cnst.WEATHER.get()).getJSONObject(0).getString(cnst.MAIN.get());
                 } catch (Exception e) {
-                    Log.d("log", "Its MAIN ===> ");
                     e.printStackTrace();
                 }
                 break;
@@ -167,6 +165,8 @@ public class CurrentWeatherData {
     }
 }
 enum cnst{
+    WIND("wind"),
+    SPEED("speed"),
     SNOW("Snow"),
     CLEAR("Clear"),
     RAIN("Rain"),
